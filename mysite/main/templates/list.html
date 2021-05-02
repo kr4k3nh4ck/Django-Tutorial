@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}View List{% endblock %}
+
+{% block content %}
+    <h1>{{ls.name}}</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+                {% for item in ls.item_set.all %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                {% if item.complete == True %}
+                                {% comment %}<li>{{item.text}} - COMPLETE </li>{% endcomment %}
+                                <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
+                                {% comment %}{% elif item.complete == False %}{% endcomment %}
+                                {% else %}
+                                {% comment %}<li>{{item.text}} - INCOMPLETE </li>{% endcomment %}
+                                <input type="checkbox", value="clicked", name="c{{item.id}}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input type="text" name="c{{item.id}}" class="form-control" value="{{item.text}}">
+                    </div>
+                {% endfor %}
+
+            <p></p>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="submit" name="newItem" value="newItem" class="btn btn-success">Add Item</button>
+                </div>
+                <input type="text" name="new">
+            </div>
+
+            <button type="submit" name="save" value="Save" class="btn btn-success">Save</button>
+
+
+        </form>
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>

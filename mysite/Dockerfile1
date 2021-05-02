@@ -1,0 +1,7 @@
+FROM mysql
+ENV PYTHONUNBUFFERED 1
+WORKDIR /db
+COPY . /app
+
+CMD python manage.py runserver
+
